@@ -1,0 +1,28 @@
+name: streaming-arc
+closes_quests: [kafka, flink, airflow]
+stack: stacks/streaming/docker-compose.yml
+exercises:
+  - id: 01-ingest
+    prompt: |
+      Write a Kafka producer (Python or CLI) that publishes at least 5 sample
+      code-daily news items to the `news` topic on the local Redpanda broker
+      at localhost:19092. Each message should be a JSON object with at least
+      `source` and `title` fields. Docs: https://docs.redpanda.com/current/develop/produce-data/
+    check: checks/01_ingest.py
+  - id: 02-transform
+    prompt: |
+      Write a streaming transform (Flink SQL or a Python consumer) that reads
+      from `news`, windows by `source` over 5 minutes, and writes per-source
+      counts to a `news_counts` topic. The check will look for at least one
+      message on `news_counts`.
+    check: checks/02_transform.py
+  - id: 03-orchestrate
+    prompt: |
+      Write an Airflow DAG (placed in stacks/streaming/dags/) that runs the
+      ingest exercise on a 15-minute schedule and supports a one-day backfill.
+      Trigger one successful run; the check will verify the DAG exists and has
+      at least one successful run in Airflow's metadata DB.
+    check: checks/03_orchestrate.py
+portfolio:
+  template: templates/streaming-portfolio
+  emit_to: ../stack-quest-streaming-demo

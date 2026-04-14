@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stack-quest"
+version = "0.1.0"
+description = "Turn beacon skill-gap quests into weekend-sized learning arcs that emit portfolio artifacts"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Michael Pawlus" }]
+dependencies = [
+    "typer>=0.12",
+    "rich>=13.7",
+    "pyyaml>=6.0",
+    "jinja2>=3.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+stack-quest = "stack_quest.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+stack_quest = ["py.typed"]
