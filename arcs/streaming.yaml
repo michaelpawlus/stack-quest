@@ -21,7 +21,10 @@ exercises:
       Write an Airflow DAG (placed in stacks/streaming/dags/) that runs the
       ingest exercise on a 15-minute schedule and supports a one-day backfill.
       Trigger one successful run; the check will verify the DAG exists and has
-      at least one successful run in Airflow's metadata DB.
+      at least one successful run in Airflow's metadata DB. Set the env var
+      STACK_QUEST_DAG_ID to your dag_id (default: stack_quest_ingest) before
+      running the check. Airflow standalone runs at http://localhost:8081 with
+      basic auth airflow:airflow.
     check: checks/03_orchestrate.py
 portfolio:
   template: templates/streaming-portfolio

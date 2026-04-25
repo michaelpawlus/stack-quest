@@ -55,6 +55,10 @@ If any of those CLIs aren't on PATH, stack-quest still works.
 
 ## MVP status
 
-The streaming arc has one working exercise (`01-ingest`) with a real check
-that hits Redpanda's Pandaproxy HTTP API. Exercises 02 and 03 have stub
-checks. The portfolio template emits a README, CLAUDE.md, and WALKTHROUGH.md.
+The streaming arc has three working exercises with real checks:
+`01-ingest` and `02-transform` hit Redpanda's Pandaproxy HTTP API,
+`03-orchestrate` hits the Airflow REST API at localhost:8081. The
+portfolio template emits a README, CLAUDE.md, and WALKTHROUGH.md.
+
+Exercise 03 reads its DAG id from `STACK_QUEST_DAG_ID`
+(default: `stack_quest_ingest`).
