@@ -47,7 +47,7 @@ stack-quest portfolio emit ARC_NAME [--path PATH] [--json]
 
 ## Integrations
 
-- `beacon` — `beacon gaps list --json` for `arcs suggest`. Optional; degrades to static.
+- `beacon` — `beacon gaps list --json` for `arcs suggest`. Optional; degrades to static. Returns the v1 envelope `{"schema_version": 1, "gaps": [...]}` — the integration in `src/stack_quest/integrations/beacon.py` unwraps `gaps`. See beacon's CLAUDE.md "Gaps subcommand contract" for the full schema and the available filters (`--category`, `--min-demand`, `--limit`, `--sort`).
 - `code-daily` — `code-daily quests complete <id> --json` from `complete`. Optional; dry-run otherwise.
 - `skillvault` — `skillvault scan PATH --json` to verify the emitted portfolio repo. Optional.
 

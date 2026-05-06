@@ -43,8 +43,12 @@ stack-quest complete streaming-arc
 
 ## How it composes with the rest of the toolchain
 
-- **beacon** — `arcs suggest` reads `beacon gaps list --json` to rank arcs by
-  how many real job-listing-derived gaps they close.
+- **beacon** — `arcs suggest` reads `beacon gaps list --json` (v1 envelope:
+  `{"schema_version": 1, "gaps": [...]}`) to rank arcs by how many real
+  job-listing-derived gaps they close. The integration unwraps the envelope
+  automatically. See beacon's CLAUDE.md "Gaps subcommand contract" for the
+  schema, filters (`--category`, `--min-demand`, `--limit`, `--sort`), and the
+  `gaps list` vs `gaps export` distinction.
 - **code-daily** — `complete` calls `code-daily quests complete <id>` for each
   quest the arc closes.
 - **skillvault** — `complete` runs `skillvault scan` against the emitted

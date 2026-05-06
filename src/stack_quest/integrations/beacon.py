@@ -11,7 +11,12 @@ def is_available() -> bool:
 
 
 def list_gaps() -> list[dict[str, Any]]:
-    """Return beacon gaps as a list of dicts, or [] if beacon isn't installed."""
+    """Return beacon gaps as a list of dicts, or [] if beacon isn't installed.
+
+    Accepts both the v1 envelope (`{"schema_version": 1, "gaps": [...]}`) and
+    the legacy bare-array format. See beacon/CLAUDE.md "Gaps subcommand
+    contract" for the field schema.
+    """
     if not is_available():
         return []
     try:
@@ -29,4 +34,6 @@ def list_gaps() -> list[dict[str, Any]]:
         data = json.loads(proc.stdout)
     except json.JSONDecodeError:
         return []
+    if isinstance(data, dict) and isinstance(data.get("gaps"), list):
+        return data["gaps"]
     return data if isinstance(data, list) else []
